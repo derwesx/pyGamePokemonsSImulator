@@ -32,17 +32,17 @@ ATTACK_INTERVAL = 0.4
 params = dict()
 
 clases = ["fire", "electro", "water", "grass", "none", "You", "Enemy"]
-params["fire"] = (90 * SCALE_FACTOR, 90 * SCALE_FACTOR)
-params["electro"] = (80 * SCALE_FACTOR, 80 * SCALE_FACTOR)
-params["water"] = (100 * SCALE_FACTOR, 100 * SCALE_FACTOR)
-params["grass"] = (90 * SCALE_FACTOR, 90 * SCALE_FACTOR)
-params["none"] = (80 * SCALE_FACTOR, 80 * SCALE_FACTOR)
-params["You"] = (120 * SCALE_FACTOR, 150 * SCALE_FACTOR)
-params["Enemy"] = (120 * SCALE_FACTOR, 150 * SCALE_FACTOR)
+params["fire"] = (int(90 * SCALE_FACTOR), int(90 * SCALE_FACTOR))
+params["electro"] = (int(80 * SCALE_FACTOR), int(80 * SCALE_FACTOR))
+params["water"] = (int(100 * SCALE_FACTOR), int(100 * SCALE_FACTOR))
+params["grass"] = (int(90 * SCALE_FACTOR), int(90 * SCALE_FACTOR))
+params["none"] = (int(80 * SCALE_FACTOR), int(80 * SCALE_FACTOR))
+params["You"] = (int(120 * SCALE_FACTOR), int(150 * SCALE_FACTOR))
+params["Enemy"] = (int(120 * SCALE_FACTOR), int(150 * SCALE_FACTOR))
 
 for i in clases:
-    params[i + "sm"] = (params[i][0] * SCALE_FACTOR_SM, params[i][1] * SCALE_FACTOR_SM)
-    params[i + "bg"] = (params[i][0] * SCALE_FACTOR_BG, params[i][1] * SCALE_FACTOR_BG)
+    params[i + "sm"] = (int(params[i][0] * SCALE_FACTOR_SM), int(params[i][1] * SCALE_FACTOR_SM))
+    params[i + "bg"] = (int(params[i][0] * SCALE_FACTOR_BG), int(params[i][1] * SCALE_FACTOR_BG))
 
 # Debug Consts
 IS_HITBOX_ON = 0
