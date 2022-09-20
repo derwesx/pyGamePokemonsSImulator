@@ -5,7 +5,7 @@
 Используйте менеджер пакетов [pip](https://pip.pypa.io/en/stable/) для установки pygame.
 
 ```bash
-pip install pygame
+pip/pip3 install pygame
 ```
 ## Запуск
 Для запуска игры необходимо запустить файл controller.py.
