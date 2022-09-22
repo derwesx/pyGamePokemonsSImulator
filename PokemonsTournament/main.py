@@ -7,18 +7,26 @@ sys.setrecursionlimit(100000)
 from classes import *
 import pygame as pg
 import random
-NUMBER_OF_PLAYERS = 3
+NUMBER_OF_PLAYERS = 5
 NUMBER_OF_TOURS = 10
 
-import trainers.my
-import trainers.b
-import trainers.c
+
+import trainers.d
+import trainers.f
+import trainers.g
+# import trainers.h
+import trainers.i
+import trainers.j
 
 TRAINERS = []
 
-TRAINERS.append(trainers.my.SmartTrainer(1))
-TRAINERS.append(trainers.b.SmartTrainer(2))
-TRAINERS.append(trainers.c.SmartTrainer(3))
+TRAINERS.append(trainers.d.SmartTrainer(1))
+TRAINERS.append(trainers.f.SmartTrainer(2))
+TRAINERS.append(trainers.g.SmartTrainer(3))
+# TRAINERS.append(trainers.h.SmartTrainer(4))
+TRAINERS.append(trainers.i.SmartTrainer(5))
+TRAINERS.append(trainers.j.SmartTrainer(6))
+
 
 random.seed(144)
 
@@ -69,7 +77,7 @@ def draw_table():
                 text = font.render(f'=', True, HPGRAY)
                 text_rect = text.get_rect(center = (i * X + X / 2, j * X + X / 2)) 
             elif i == 0 or j == 0:
-                text = font.render(f'{i + j}', True, DSGRAY)
+                text = font.render(f'{TRAINERS[i + j - 1].name}', True, DSGRAY)
                 text_rect = text.get_rect(center = (i * X + X / 2, j * X + X / 2)) 
             else:
                 text = font.render(f'{resultsTable[i][j]}', True, GRAY)
@@ -102,6 +110,7 @@ for tours in range(NUMBER_OF_TOURS):
         currentBox.append(get_random_pokemon())
     for firstPlayerID in range(NUMBER_OF_PLAYERS):
         for secondPlayerID in range(NUMBER_OF_PLAYERS):
+            print(firstPlayerID, secondPlayerID)
             if firstPlayerID == secondPlayerID:
                 continue
             # print(firstPlayerID, secondPlayerID)
@@ -109,10 +118,14 @@ for tours in range(NUMBER_OF_TOURS):
             firstTrainer = copy.deepcopy(TRAINERS[firstPlayerID])
             secondTrainer = copy.deepcopy(TRAINERS[secondPlayerID])
             firstTrainer.box = copy.deepcopy(currentBox)
+            print("first trainer passed")
             secondTrainer.box = copy.deepcopy(currentBox)
-
+            print("second trainer passed")
+            idd = 0
             while len(firstTrainer.box) > 0:
+                idd += 1
                 currentBattle = Battle(firstTrainer, secondTrainer)
+                print(f"battle started {idd}")
                 currentBattleResult = currentBattle.simulateTurn()
 
                 if currentBattleResult == 1:
@@ -121,7 +134,7 @@ for tours in range(NUMBER_OF_TOURS):
                 else:
                     resultsLinear[secondPlayerID] += 1
                     resultsTable[secondPlayerID+1][firstPlayerID+1] += 1
-
+            print(firstPlayerID, secondPlayerID)
     draw_table()
     lol = 1
     while lol:
@@ -148,9 +161,14 @@ for i in range(NUMBER_OF_PLAYERS):
     resultsLinear[id] = -10
     print(resultsLinear)
     print(ok)
-    resultsTable[i][NUMBER_OF_PLAYERS // 2] = id + 1
+    resultsTable[i][NUMBER_OF_PLAYERS // 2] = TRAINERS[id].name
     resultsTable[i][NUMBER_OF_PLAYERS // 2 + 1] = mx
 draw_end_table()
-time.sleep(10)
+lol = 1
+while lol:
+    for i in pg.event.get():
+        if i.type == pg.KEYDOWN:
+            if i.key == pg.K_SPACE:
+                lol = 0
 
 pg.quit()
